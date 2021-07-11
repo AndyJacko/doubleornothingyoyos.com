@@ -1,0 +1,11 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.divSpacer {
+  margin: 1rem 0;
+}

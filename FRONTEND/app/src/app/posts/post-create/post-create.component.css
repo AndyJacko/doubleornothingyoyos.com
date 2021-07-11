@@ -1,0 +1,35 @@
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+mat-radio-button ~ mat-radio-button {
+  margin: 5px;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.divSpacer {
+  margin: 1rem 0;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 10rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+  border: 2px solid #aaa;
+  border-radius: 0.5rem;
+}

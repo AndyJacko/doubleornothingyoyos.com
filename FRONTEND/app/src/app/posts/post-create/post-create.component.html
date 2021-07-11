@@ -1,0 +1,81 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+    <mat-card-title>Add A New Post</mat-card-title>
+    <mat-card-subtitle>Got something to share?</mat-card-subtitle>
+    <hr />
+    <label>Post Type</label>
+    <mat-radio-group name="postType" formControlName="postType">
+      <mat-radio-button value="Text" color="primary">Text</mat-radio-button>
+      <mat-radio-button value="Image" color="primary">Image</mat-radio-button>
+      <mat-radio-button value="Video" color="primary">Video</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+      <mat-label>Title...</mat-label>
+      <input
+        matInput
+        type="text"
+        name="title"
+        formControlName="title"
+        placeholder="Title..."
+        #title
+      />
+      <mat-hint align="end">{{ title.value.length }} / 30</mat-hint>
+      <mat-error *ngIf="form.get('title').invalid">
+        Please enter a title...between 10 and 30 characters...
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Content...</mat-label>
+      <textarea
+        matInput
+        rows="4"
+        name="content"
+        formControlName="content"
+        placeholder="Content..."
+        #content
+      ></textarea>
+      <mat-hint align="end"> {{ content.value.length }} / 2000 </mat-hint>
+      <mat-error *ngIf="form.get('content').invalid">
+        Please enter a full description...between 10 and 2000 characters...
+      </mat-error>
+    </mat-form-field>
+
+    <!-- <div class="divSpacer" *ngIf="form.get('postType').value === 'Image'"> -->
+    <div class="divSpacer">
+      <button
+        mat-stroked-button
+        color="accent"
+        type="button"
+        (click)="filePicker.click()"
+      >
+        SELECT IMAGE
+      </button>
+      <input type="file" #filePicker (change)="onImagePicked($event)" />
+    </div>
+
+    <div
+      class="image-preview"
+      *ngIf="imagePreview !== '' && imagePreview && form.get('imageURL').valid"
+    >
+      <img [src]="imagePreview" [alt]="form.value.title" />
+    </div>
+
+    <!-- <mat-form-field *ngIf="form.get('postType').value === 'Video'"> -->
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="videoURL"
+        formControlName="videoURL"
+        placeholder="Video URL..."
+      />
+    </mat-form-field>
+
+    <div class="divSpacer">
+      <button mat-raised-button color="primary" type="submit">SAVE POST</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,2 +1,6 @@
 # doubleornothingyoyos.com
 Double Or Nothing YoYos social media platform *In Development*
+
+This is a project I am working on to allow yoyoers to share text/images/videos relating to YoYos...
+
+This project utilises the MEAN stack using Angular for the front end, NodeJS and Express for the backend API and mongoDB as data storage...

@@ -1,0 +1,70 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<mat-paginator
+  [length]="totalPosts"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)"
+  *ngIf="posts.length > 0"
+></mat-paginator>
+
+<mat-accordion
+  class="example-headers-align"
+  multi
+  *ngIf="posts.length > 0 && !isLoading"
+>
+  <mat-expansion-panel *ngFor="let post of posts; let i = index">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ post.title }} </mat-panel-title>
+
+      <mat-icon *ngIf="post.postType === 'Video'">
+        <span> slideshow </span>
+      </mat-icon>
+      <mat-icon *ngIf="post.postType === 'Image'">
+        <span> portrait </span>
+      </mat-icon>
+      <mat-icon *ngIf="post.postType === 'Text'">
+        <span> chat_bubble_outline </span>
+      </mat-icon>
+    </mat-expansion-panel-header>
+
+    <div class="post-image" *ngIf="post.postType === 'Image'">
+      <img [src]="post.imageURL" [alt]="post.title" />
+    </div>
+
+    <p *ngIf="post.postType === 'Video'">Video URL: {{ post.videoURL }}</p>
+
+    <!-- <p *ngIf="post.postType === 'Video'">
+      <iframe
+        width="560"
+        height="315"
+        [src]="post.videoURL"  https://www.youtube.com/embed/gyAqS9K70W0
+        [title]="post.title"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </p> -->
+
+    <p>{{ post.content }}</p>
+
+    <mat-action-row *ngIf="userAuthenticated && userId === post.creator">
+      <a mat-button color="accent" [routerLink]="['/edit', post.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">
+        DELETE
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-paginator
+  [length]="totalPosts"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)"
+  *ngIf="posts.length > 0"
+></mat-paginator>
+
+<p class="no-posts mat-h2" *ngIf="posts.length <= 0 && !isLoading">
+  No posts to show...Go ahead and add one...
+</p>

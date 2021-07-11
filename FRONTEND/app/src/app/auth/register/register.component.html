@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form
+    (submit)="onRegister(registerForm)"
+    #registerForm="ngForm"
+    *ngIf="!isLoading"
+  >
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-subtitle>
+      You must register to create a post...
+    </mat-card-subtitle>
+    <hr />
+    <mat-form-field>
+      <mat-label>Email...</mat-label>
+      <input
+        matInput
+        ngModel
+        type="email"
+        name="email"
+        placeholder="Email..."
+        #email="ngModel"
+        required
+        email
+      />
+      <mat-error *ngIf="email.invalid">
+        Please enter a valid email address...
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password...</mat-label>
+      <input
+        matInput
+        ngModel
+        type="password"
+        name="password"
+        placeholder="Password..."
+        #password="ngModel"
+        required
+      />
+      <mat-error *ngIf="password.invalid">
+        Please enter a password...
+      </mat-error>
+    </mat-form-field>
+
+    <div class="divSpacer">
+      <button mat-raised-button color="primary" type="submit">REGISTER</button>
+    </div>
+  </form>
+</mat-card>
